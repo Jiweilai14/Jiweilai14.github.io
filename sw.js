@@ -2,13 +2,14 @@
    目标只有一个：断网也能打开。
    策略刻意保守——不做花活，不接管非本域请求。 */
 
-const VERSION = 'v4';
+const VERSION = 'v5';
 const CACHE = 'ytyj-' + VERSION;
 
 const PRECACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './manifest-dark.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',

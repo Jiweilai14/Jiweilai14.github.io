@@ -9,7 +9,22 @@
 <meta name="apple-mobile-web-app-title" content="一天一件">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest.webmanifest" id="mf">
+<script>
+/* 清单里只能写死一个主题色，系统栏会拿它上色。
+   所以按当前配色切两份清单，否则深色下底部系统栏会一直是纸白。 */
+(function(){
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  var link = document.getElementById('mf');
+  function sync(){
+    if(!link) return;
+    var want = (mq && mq.matches) ? 'manifest-dark.webmanifest' : 'manifest.webmanifest';
+    if(link.getAttribute('href') !== want) link.setAttribute('href', want);
+  }
+  sync();
+  if(mq){ if(mq.addEventListener) mq.addEventListener('change', sync); else if(mq.addListener) mq.addListener(sync); }
+})();
+</script>
 <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="description" content="睡前写三件事：把烦恼碎掉，记一件做成的，记一个让你好受一点的瞬间。数据只存在你自己的设备上。">
@@ -22,6 +37,7 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
+  color-scheme:light dark;
   --paper:#FBF8F3; --ink:#241F1A; --ink2:#6F655A; --ink3:#9B9186;
   --line:#E9E1D6; --accent:#B5654A; --accent-soft:#F6E7DF; --card:#FFFFFF;
   --shadow:0 1px 2px rgba(60,45,30,.05), 0 10px 28px rgba(60,45,30,.07);
@@ -33,7 +49,7 @@
     --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.4);
   }
 }
-html,body{margin:0;height:100%}
+html,body{margin:0;height:100%;background:var(--paper)}
 body{
   background:var(--paper); color:var(--ink);
   font:16px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
