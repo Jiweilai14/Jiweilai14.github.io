@@ -192,6 +192,24 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
 .calm-end{font-size:17px;color:var(--ink);margin:24px 0 30px;line-height:1.8}
 .calm-close{align-self:flex-start;font-size:14px;color:var(--ink2);background:none;
   border:1px solid var(--line);border-radius:99px;padding:10px 20px;cursor:pointer}
+
+/* ---- why ---- */
+.why-lead{font-size:15px;color:var(--ink2);line-height:1.85;margin:0 0 20px}
+.why-item{margin:0 0 22px}
+.why-item h4{font-size:15.5px;font-weight:600;color:var(--ink);margin:0 0 9px;letter-spacing:.02em}
+.why-item p{margin:0 0 9px;font-size:14.5px;line-height:1.85;color:var(--ink2)}
+.why-item p.lab{font-size:11.5px;letter-spacing:.14em;color:var(--ink3);margin:12px 0 6px}
+.why-item p.one{color:var(--accent);padding-left:11px;border-left:2px solid var(--accent);margin-top:11px}
+.why-item p:last-child{margin-bottom:0}
+
+/* ---- support ---- */
+.support-qr{width:100%;max-width:250px;display:block;margin:16px auto 12px;
+  border-radius:14px;border:1px solid var(--line);background:#fff}
+/* 环形赞赏码：码本身是圆的，套方框会把构图压死 */
+.support-qr.round{border-radius:50%}
+.qr-hint{text-align:center;font-size:12px;line-height:1.9;color:var(--ink3);margin:0 0 20px}
+.qr-save{display:inline-block;margin-top:6px;font-size:12.5px;color:var(--accent);
+  text-decoration:none;border-bottom:1px solid rgba(181,101,74,.32);padding-bottom:1px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -291,6 +309,10 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
       <button class="btn warm" id="btnCalm" type="button">我现在很难受
         <em>让你自己以前的记录，出来陪你</em></button>
 
+      <h3>为什么这么写</h3>
+      <button class="btn" id="btnWhy" type="button">为什么是这三件事
+        <em>成功、幸福、烦恼，各自有什么用</em></button>
+
       <h3>数据</h3>
       <button class="btn" id="btnExport" type="button">导出备份
         <em>存成 JSON 文件，换手机时不会丢</em></button>
@@ -303,6 +325,60 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
         烦恼不存档：粉碎只留下“碎了几件”这个数字，文字当场删掉。<br><br>
         没有打卡，没有连续天数，没有红色的叉。
       </div>
+
+      <div id="supportBox">
+        <h3>支持</h3>
+        <button class="btn" id="btnSupport" type="button">支持一下
+          <em>没有广告也没有会员，谢谢</em></button>
+      </div>
+    </div>
+  </main>
+
+  <main class="view hidden" id="viewWhy">
+    <div class="page">
+      <h3>为什么是这三件事</h3>
+      <p class="why-lead">这个应用不做日记。三块，各管一件事。</p>
+
+      <div class="why-item">
+        <h4>一、今天做成的事</h4>
+        <p>多小都算。洗了碗、回了一条拖了三天的消息、生气的时候没回嘴。</p>
+        <p class="lab">为什么有用</p>
+        <p>一天里有没有「往前挪了一点」的感觉，比挪了多大更影响情绪。Amabile 和 Kramer 研究了几百人的工作日记，发现让人状态最好的不是大成就，是每天那一点点进展。</p>
+        <p>另一层：人不相信自己「能行」，是从「我做到过」的经验里长出来的。所以这里不写目标，只写已经发生的。</p>
+        <p class="one">你不需要先相信自己，你只需要有记录。</p>
+      </div>
+
+      <div class="why-item">
+        <h4>二、今天让你好受一点的瞬间</h4>
+        <p>一个味道、一句别人的话、一分钟完全属于你自己。</p>
+        <p class="lab">为什么有用</p>
+        <p>Seligman 的团队做过一个「三件好事」练习：每天写下当天顺利的事，坚持一两周，幸福感上升、低落情绪下降，效果能维持几个月。Emmons 和 McCullough 的感恩日记实验也发现，一周记几次值得感激的事的人，报告更高的幸福感和更少的身体不适。</p>
+        <p>关键不是让生活变好，是让你看见本来就在的那部分。人天生更容易记住威胁和失误，这里是刻意往另一边加一点重量。</p>
+        <p class="one">不是当天变好了，是你当天看见了一点。</p>
+      </div>
+
+      <div class="why-item">
+        <h4>三、把烦恼倒出来，然后碎掉</h4>
+        <p>一行一件。写完点粉碎，文字当场消失，「碎了几件」只留一个数字。</p>
+        <p class="lab">为什么有用</p>
+        <p>把说不清的担心写成具体的句子，这个动作本身就在降噪。有脑成像研究发现，给情绪贴上词语标签，杏仁核的活跃度会下降——用词命名，比硬忍着有用。</p>
+        <p>另一层：没做完的事会一直占着注意力。写下来等于把它从脑子里挪到纸上，脑子才肯松手。</p>
+        <p class="lab">为什么碎掉，而不是存档</p>
+        <p>存档会变成一份待办清单，每次翻到都在提醒你还没解决。这里要的不是留下证据，是完成「我放下了」这个动作。</p>
+        <p class="one">写出来是为了放下，不是为了记住。</p>
+      </div>
+
+      <div class="why-item">
+        <h4>四、为什么没有打卡、没有连续天数</h4>
+        <p>打卡制造的是「怕断」，不是「想写」。断一天，很多人干脆整个放弃。所以这里空白就空白，不扣分。</p>
+      </div>
+
+      <div class="why-item">
+        <h4>五、一句实话</h4>
+        <p>上面这些研究说明的是「这样写对人有用」，不代表这个应用能治病。</p>
+        <p>如果你连续一段时间情绪低落、睡不着、什么都不想做，或者出现伤害自己的念头——这不是靠记日记能过去的。请找专业的人：可以拨 <b>12356</b>（全国统一心理援助热线，24 小时免费），也可以去医院的精神心理科。</p>
+        <p>数据只存在你自己的手机里，不上传任何服务器。</p>
+      </div>
     </div>
   </main>
 </div>
@@ -312,6 +388,15 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
 <div class="overlay hidden" id="calm">
   <div id="calmBody"></div>
   <button class="calm-close" id="calmClose" type="button">好一点了</button>
+</div>
+
+<div class="overlay hidden" id="support">
+  <p class="calm-lead" style="margin-bottom:12px">支持一下</p>
+  <p class="why-lead">没有广告，没有会员，不收集你的任何数据。<br>如果它帮到你了，谢谢。</p>
+  <img class="support-qr round" id="supportQr" src="icons/support-qr.png" alt="微信赞赏码">
+  <p class="qr-hint">微信「扫一扫 → 右上角相册」选这张图，<br>或者用另一台手机直接扫。<br>
+    <a class="qr-save" id="qrSave" href="icons/support-qr.png" download="一天一件-赞赏码.png">保存这张图</a></p>
+  <button class="calm-close" id="supportClose" type="button">继续用就好</button>
 </div>
 
 <script>
@@ -619,7 +704,7 @@ function renderToday(){
 }
 
 /* ============ navigation ============ */
-var views={write:$('#viewWrite'),archive:$('#viewArchive'),stats:$('#viewStats')};
+var views={write:$('#viewWrite'),archive:$('#viewArchive'),stats:$('#viewStats'),why:$('#viewWhy')};
 var currentView='write';
 function show(name){
   currentView=name;
@@ -759,6 +844,20 @@ function openCalm(){
 }
 $('#calmClose').addEventListener('click',function(){ $('#calm').classList.add('hidden'); });
 $('#btnCalm').addEventListener('click',openCalm);
+
+/* ============ 说明 / 支持 ============ */
+$('#btnWhy').addEventListener('click',function(){ show('why'); });
+$('#btnSupport').addEventListener('click',function(){ $('#support').classList.remove('hidden'); });
+$('#supportClose').addEventListener('click',function(){ $('#support').classList.add('hidden'); });
+
+// 收款码还没放上来时，整块「支持」不显示，界面保持干净
+(function qrGuard(){
+  var img=$('#supportQr'), box=$('#supportBox');
+  if(!img || !box) return;
+  function hide(){ box.classList.add('hidden'); }
+  img.addEventListener('error',hide);
+  if(img.complete && img.naturalWidth===0) hide();
+})();
 
 /* ============ export / import ============ */
 $('#btnExport').addEventListener('click',function(){

@@ -2,7 +2,7 @@
    目标只有一个：断网也能打开。
    策略刻意保守——不做花活，不接管非本域请求。 */
 
-const VERSION = 'v1';
+const VERSION = 'v4';
 const CACHE = 'ytyj-' + VERSION;
 
 const PRECACHE = [
@@ -13,7 +13,8 @@ const PRECACHE = [
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
-  './icons/favicon-32.png'
+  './icons/favicon-32.png',
+  './icons/support-qr.png'
 ];
 
 /* 安装：把壳子抓下来。单个文件失败不连坐，避免整包装不上。 */
