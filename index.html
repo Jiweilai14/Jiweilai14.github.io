@@ -70,7 +70,7 @@ header{flex:none;display:flex;align-items:center;justify-content:space-between;g
 body.subview .brand .back{display:inline}
 .brand:active{opacity:.6}
 .topnav{display:flex;gap:6px;flex:none}
-.topnav button{font-size:13px;color:var(--ink2);background:none;border:1px solid var(--line);
+.topnav button{font-size:12.5px;color:var(--ink2);background:none;border:1px solid var(--line);
   padding:6px 12px;border-radius:99px;cursor:pointer;transition:.18s;line-height:1.2}
 .topnav button.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
 
@@ -93,7 +93,7 @@ body.subview .brand .back{display:inline}
   overflow:hidden;text-overflow:ellipsis;
   font-family:"Songti SC","Noto Serif SC","Source Han Serif SC","Noto Serif CJK SC",Georgia,"PingFang SC",serif;
   font-size:20px;font-weight:500;line-height:1.25;letter-spacing:.04em;color:var(--ink)}
-.sec-h .h-desc{flex:1 1 auto;min-width:0;font-size:12px;line-height:1.4;letter-spacing:.03em;color:var(--ink2);
+.sec-h .h-desc{flex:1 1 auto;min-width:0;font-size:12.5px;line-height:1.4;letter-spacing:.03em;color:var(--ink2);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 烦恼卡保留虚线框区分"可碎"，但不再用陶土色 + ↓ 抢首屏（首屏气质优先温和） */
 .mini{font-size:12.5px;color:var(--ink3);background:none;border:none;padding:4px 8px;
@@ -104,11 +104,11 @@ body.subview .brand .back{display:inline}
   background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);
   border-radius:11px;padding:9px 11px}
 .starter{flex:1;text-align:left;background:none;border:none;cursor:pointer;
-  padding:0;font-size:14.5px;line-height:1.6;color:var(--ink2);transition:color .18s}
+  padding:0;font-size:14px;line-height:1.6;color:var(--ink2);transition:color .18s}
 .starter:hover{color:var(--accent)}
 .starter .arr{color:var(--accent);opacity:.5;margin-right:5px}
-.hidep{flex:none;font-size:15px;line-height:1.4;color:var(--ink3);background:none;
-  border:none;padding:8px 11px;margin:-8px -11px -8px 0;cursor:pointer;opacity:.7}
+.hidep{flex:none;font-size:14px;line-height:1.4;color:var(--ink3);background:none;
+  border:none;padding:9px 12px;margin:-9px -12px -9px 0;cursor:pointer;opacity:.7}
 .hidep:hover{opacity:1;color:var(--accent)}
 .link{font-size:12.5px;color:var(--ink3);background:none;border:none;padding:2px 0 9px;
   cursor:pointer;text-decoration:underline;text-underline-offset:3px;
@@ -124,7 +124,7 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
 .sec-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
   border-top:1px solid var(--line);padding-top:10px;margin-top:2px}
 .sec-foot .right{display:flex;align-items:center;gap:10px;margin-left:auto}
-.hint{font-size:11.5px;color:var(--ink3);line-height:1.5}
+.hint{font-size:12.5px;color:var(--ink3);line-height:1.5}
 .save{font-size:14px;color:#fff;background:var(--accent);border:none;border-radius:11px;
   padding:9px 20px;cursor:pointer;letter-spacing:.06em;transition:.18s;flex:none}
 .save:disabled{background:var(--line);color:var(--ink3);opacity:1;cursor:default}
@@ -264,7 +264,7 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
         <div class="h-l"><span class="h-key">倒出来</span><span class="h-desc">一行一件，写完就碎</span></div>
       </div>
       <div class="dump-wrap">
-        <textarea class="editor" id="dump" rows="3" placeholder="还没做完的事、没回的消息、说不清的担心……一行一件"></textarea>
+        <textarea class="editor" id="dump" rows="3" placeholder="没做完的、没回的、说不清的…"></textarea>
         <div id="shredLayer"></div>
       </div>
       <div class="sec-foot">
@@ -291,7 +291,7 @@ textarea.editor::placeholder{color:var(--ink3);opacity:.8}
 
     <div class="sec">
       <div class="sec-h">
-        <div class="h-l"><span class="h-key">好受的瞬间</span><span class="h-desc">一个味道、一句话</span></div>
+        <div class="h-l"><span class="h-key">好受的瞬间</span><span class="h-desc">有一点也算</span></div>
         <button class="mini" id="btnShuffleHappy" type="button">换一句</button>
       </div>
       <div class="starter-row" id="starterRowHappy">
@@ -540,23 +540,26 @@ function insertAtCursor(ta,text){
 }
 
 /* ============ starters ============ */
+/* 规则：每条 ≤12 字（含标点）。
+   360px 下 14 字还放得下，但 320px 只有约 13 字空间，取 12 留余量——
+   超了会折行，第二行只吊两三个字，比换行本身更难看。新增时先数一遍。 */
 var DO_STARTERS=[
   '今天我做了一件很小的事：',
-  '有件事我本来不想做，但还是做了：',
+  '不想做但还是做了的是：',
   '今天我忍住了一次，',
-  '今天有件事，如果我没做，今天会变糟：',
+  '今天有件事，不做会变糟：',
   '今天我为自己做的是',
-  '我今天比昨天好一点点的地方是',
+  '我比昨天好了一点点：',
   '今天我拒绝了一个',
-  '今天有个人，我对ta好了一点：'
+  '今天我对一个人好了点：'
 ];
 var HAPPY_STARTERS=[
   '今天让我松一口气的是',
-  '今天有个瞬间，我想多待一会儿：',
-  '今天有个味道、声音或温度，让我觉得还好：',
+  '有个瞬间我想多待一会儿：',
+  '有个味道让我觉得还好：',
   '今天有人对我好了一点，是',
-  '今天有件小事，没人注意到，但我注意到了：',
-  '今天有一分钟完全属于我自己，我在',
+  '有件小事只有我注意到了：',
+  '有一分钟完全属于我，我在',
   '今天我笑了一下，因为',
   '今天我看见'
 ];
